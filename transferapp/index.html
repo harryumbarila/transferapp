@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TransferApp</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <button id="menu">☰</button>
+      <h1 id="home" onclick="goToScreen(1)">TransferApp</h1>
+    </nav>
+    <nav>
+      <button id="user">👤</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- Pantalla 1: Registro/Iniciar sesión -->
+    <div id="screen1">
+      <h2>Registro/Iniciar sesión</h2>
+      <label for="email">Email:</label>
+      <input type="email" id="email">
+      <label for="password">Contraseña:</label>
+      <input type="password" id="password">
+      <button onclick="togglePassword()">Mostrar/Ocultar Contraseña</button>
+      <button class="btn" onclick="goToScreen(2)">Iniciar Sesión</button>
+      <button class="btn">Registrarse</button>
+    </div>
+
+    <!-- Pantalla 2: Selección de Plan -->
+    <div id="screen2" class="hidden">
+      <h2>Selección de Plan</h2>
+      <div>
+        <button class="btn plan" onclick="selectPlan(this)">Freemium</button>
+        <button class="btn plan" onclick="selectPlan(this)">Pro</button>
+        <button class="btn plan" onclick="selectPlan(this)">Business</button>
+      </div>
+      <button class="btn-primary" onclick="goToScreen(3)">Seleccionar</button>
+    </div>
+
+    <!-- Pantalla 3: Subir Video -->
+    <div id="screen3" class="hidden">
+      <h2>Subir Video</h2>
+      <div onclick="document.getElementById('fileInput').click()" style="border: 1px solid #333; padding: 20px; text-align: center;">
+        Área de Carga
+      </div>
+      <input type="file" id="fileInput" class="file-input">
+      <button class="btn-primary" onclick="goToScreen(4)">Subir</button>
+    </div>
+
+    <!-- Pantalla 4: Generación de Enlace -->
+    <div id="screen4" class="hidden">
+      <h2>Generación de Enlace</h2>
+      <button id="generateLinkBtn" class="btn" onclick="generateLink()">Generar Enlace</button>
+      <p id="generatedLink"></p>
+      <button class="btn-primary" onclick="goToScreen(5)">Siguiente</button>
+    </div>
+
+    <!-- Pantalla 5: Compartir Enlace -->
+    <div id="screen5" class="hidden">
+      <h2>Compartir Enlace</h2>
+      <p>Enlace Generado: <span id="sharedLink"></span></p>
+      <button class="btn" onclick="copyLink()">Copiar Enlace</button>
+      <button class="btn" onclick="showShareOptions()">Compartir</button>
+      <div id="shareOptions" class="hidden">
+        <p>¿En qué red social quieres compartir?</p>
+        <button class="btn social-btn">WhatsApp</button>
+        <button class="btn social-btn">Facebook</button>
+        <button class="btn social-btn">Instagram</button>
+        <button class="btn social-btn">TikTok</button>
+        <button class="btn social-btn">LinkedIn</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <nav>
+      <a href="#">Facebook</a>
+      <a href="#">TikTok</a>
+      <a href="#">Instagram</a>
+    </nav>
+    <p>
+      <a href="#" style="color: #ddd;">Política de Privacidad</a> | 
+      <a href="#" style="color: #ddd;">Blog</a>
+    </p>
+  </footer>
+
+  <script>
+    function togglePassword() {
+      const passwordField = document.getElementById('password');
+      if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+      } else {
+        passwordField.type = 'password';
+      }
+    }
+
+    function goToScreen(screenNumber) {
+      for (let i = 1; i <= 5; i++) {
+        document.getElementById('screen' + i).classList.add('hidden');
+      }
+      document.getElementById('screen' + screenNumber).classList.remove('hidden');
+      window.history.pushState({}, "", `#screen${screenNumber}`);
+    }
+
+    function selectPlan(button) {
+      document.querySelectorAll('.plan').forEach(btn => {
+        btn.classList.remove('selected-plan');
+      });
+      button.classList.add('selected-plan');
+    }
+
+    function generateLink() {
+      const link = 'https://example.com/video123';
+      document.getElementById('generatedLink').textContent = link;
+      document.getElementById('sharedLink').textContent = link;
+      document.getElementById('generateLinkBtn').classList.add('btn-primary');
+    }
+
+    function copyLink() {
+      const link = document.getElementById('sharedLink').textContent;
+      navigator.clipboard.writeText(link).then(() => {
+        alert('Enlace copiado');
+      });
+    }
+
+    function showShareOptions() {
+      document.getElementById('shareOptions').classList.remove('hidden');
+    }
+
+    window.onload = function() {
+      const currentHash = window.location.hash;
+      if (currentHash) {
+        const screenNumber = currentHash.replace("#screen", "");
+        goToScreen(screenNumber);
+      } else {
+        goToScreen(1);
+      }
+    }
+  </script>
+</body>
+</html>

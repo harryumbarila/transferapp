@@ -1,0 +1,121 @@
+@font-face {
+    font-family: 'GT Super WT Regular';
+    src: url('fonts/GT-Super-WT-Regular.woff2') format('woff2');
+  }
+  
+  @font-face {
+    font-family: 'Aktiv Grotesk Trial Regular';
+    src: url('fonts/Aktiv-Grotesk-Trial-Regular.woff2') format('woff2');
+  }
+  
+  body {
+    font-family: 'Aktiv Grotesk Trial Regular', sans-serif;
+    margin: 0;
+    background-color: white;
+    line-height: 1.6;
+  }
+  
+  header, footer {
+    font-family: 'GT Super WT Regular', serif;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  header h1, footer h1 {
+    margin: 0;
+    cursor: pointer;
+  }
+  
+  header nav, footer nav {
+    display: flex;
+    align-items: center;
+  }
+  
+  header nav button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    margin-right: 20px;
+  }
+  
+  header nav button:hover {
+    color: #ddd;
+  }
+  
+  main {
+    padding: 40px 20px;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .btn {
+    background-color: #555;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .btn-primary {
+    background-color: #007BFF;
+  }
+  
+  .selected-plan {
+    background-color: #007BFF !important;
+  }
+  
+  .file-input {
+    display: none;
+  }
+  
+  footer {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  footer nav {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  
+  footer nav a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+  }
+  
+  footer nav a:hover {
+    text-decoration: underline;
+  }
+  
+  @media (max-width: 768px) {
+    .btn {
+      padding: 8px 16px;
+    }
+  }
+  
+  .social-btn {
+    display: block;
+    margin: 10px auto;
+    background-color: #007BFF;
+    padding: 10px 20px;
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
+  
